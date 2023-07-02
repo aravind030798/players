@@ -1,0 +1,133 @@
+<main
+  class="bg-slate-900 flex flex-col p-10 items-center justify-center min-h-screen w-full"
+>
+  <button class="text-blue-500 px-8 py-4" (click)="update_show_add_player()">
+    Add Player
+  </button>
+  <div
+    class="relative overflow-x-auto shadow-md sm:rounded-lg w-3/4 rounded-lg border border-slate-100 p-8"
+  >
+    <table
+      class="table-auto w-full text-sm text-left text-gray-500 dark:text-gray-400"
+    >
+      <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
+        <tr>
+          <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800">
+            Name
+          </th>
+          <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800">
+            Catches Made
+          </th>
+          <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800">
+            Made Field Goals
+          </th>
+          <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800">
+            Missed Field Goals
+          </th>
+          <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800">
+            Rushing Yards
+          </th>
+          <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800">
+            Sacks
+          </th>
+          <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800">
+            Touchdown Thrown
+          </th>
+          <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800">
+            Update
+          </th>
+          <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800">
+            Delete
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let player of players; let i = index"
+          class="border-b border-gray-200 dark:border-gray-700"
+        >
+          <td class="px-6 py-4">
+            {{ player.name }}
+          </td>
+          <td class="px-6 py-4">{{ player.catches_made }}</td>
+          <td class="px-6 py-4">{{ player.made_field_goals }}</td>
+          <td class="px-6 py-4">{{ player.missed_field_goals }}</td>
+          <td class="px-6 py-4">{{ player.rushing_yards }}</td>
+          <td class="px-6 py-4">{{ player.sacks }}</td>
+          <td class="px-6 py-4">{{ player.touchdowns_thrown }}</td>
+          <td class="px-6 py-4">
+            <button class="text-blue-500" (click)="update_player(player)">
+              Update
+            </button>
+          </td>
+          <td class="px-6 py-4">
+            <button class="text-red-400" (click)="delete_player(player)">
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+
+<div
+  *ngIf="show_add_player"
+  class="absolute h-screen w-full backdrop-blur-sm top-0 left-0 flex items-center justify-center"
+>
+  <form
+    [formGroup]="new_player_form"
+    (ngSubmit)="on_submit(new_player_form)"
+    class="rounded bg-slate-600 p-8 w-1/2 flex flex-col gap-2"
+  >
+    <h1 class="text-white my-4">Add new player</h1>
+    <input
+      type="text"
+      placeholder="Name"
+      class="p-2 rounded bg-slate-500 w-full"
+      formControlName="name"
+    />
+    <input
+      type="number"
+      placeholder="Catches Made"
+      class="p-2 rounded bg-slate-500 w-full"
+      formControlName="catches_made"
+    />
+    <input
+      type="number"
+      placeholder="Made field goals"
+      class="p-2 rounded bg-slate-500 w-full"
+      formControlName="made_field_goals"
+    />
+    <input
+      type="number"
+      placeholder="Missed Field Goals"
+      class="p-2 rounded bg-slate-500 w-full"
+      formControlName="missed_field_goals"
+    />
+    <input
+      type="number"
+      placeholder="Rushing Yards"
+      class="p-2 rounded bg-slate-500 w-full"
+      formControlName="rushing_yards"
+    />
+    <input
+      type="number"
+      placeholder="Sacks"
+      class="p-2 rounded bg-slate-500 w-full"
+      formControlName="sacks"
+    />
+    <input
+      type="number"
+      placeholder="Touchdowns Thrown"
+      class="p-2 rounded bg-slate-500 w-full"
+      formControlName="touchdowns_thrown"
+    />
+
+    <input
+      type="submit"
+      value="Create"
+      class="bg-blue-500 text-white rounded py-4"
+    />
+  </form>
+</div>
